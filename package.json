@@ -7,11 +7,13 @@
     "test": "mocha -R spec src/*.spec.js"
   },
   "keywords": [
-    "noise", "pcg"
+    "noise",
+    "pcg"
   ],
   "author": "Johan Klokkhammer Helsing <johanhelsing@gmail.com>",
   "license": "Zlib",
   "devDependencies": {
+    "chai": "^2.3.0",
     "mocha": "^2.2.5"
   }
 }
