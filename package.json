@@ -1,0 +1,17 @@
+{
+  "name": "noisemodeler",
+  "version": "0.0.0",
+  "description": "A noise modeler evaluator library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec src/*.spec.js"
+  },
+  "keywords": [
+    "noise", "pcg"
+  ],
+  "author": "Johan Klokkhammer Helsing <johanhelsing@gmail.com>",
+  "license": "Zlib",
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  }
+}
