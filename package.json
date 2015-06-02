@@ -4,7 +4,8 @@
   "description": "A noise modeler evaluator library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec src/*.spec.js"
+    "test": "mocha -R spec src/*.spec.js",
+    "watch": "mocha -R spec src/*.spec.js --watch"
   },
   "keywords": [
     "noise",
