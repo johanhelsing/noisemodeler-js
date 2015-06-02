@@ -3,111 +3,119 @@ require('chai').should();
 
 describe('compile', function() {
 
-    it('should return a function', function() {
-        compile({}).should.be.a('function');
-    });
+    describe('basics', function() {
 
-    it('can compile a very simple module without errors', function() {
-        var meaningOfLife = {
-            moduleTypes: [
-                {
-                    name: "meaningOfLife",
-                    description: "outputs the value 42",
-                    inputs: [],
-                    outputs: [
-                        { name: "meaning", source: "c1.value" }
-                    ],
-                    modules: [
-                        {
-                            name: "c1",
-                            type: "constant1",
-                            inputs: { value: [ 42 ] }
-                        }
-                    ]
-                }
-            ]
-        };
+        it('should return a function', function() {
+            compile({}).should.be.a('function');
+        });
 
-        compile(meaningOfLife);
-    });
+        it('can compile a very simple module without errors', function() {
+            var meaningOfLife = {
+                moduleTypes: [
+                    {
+                        name: "meaningOfLife",
+                        description: "outputs the value 42",
+                        inputs: [],
+                        outputs: [
+                            { name: "meaning", source: "c1.value" }
+                        ],
+                        modules: [
+                            {
+                                name: "c1",
+                                type: "constant1",
+                                inputs: { value: [ 42 ] }
+                            }
+                        ]
+                    }
+                ]
+            };
 
-    it('creates a function which returns the expected results', function() {
-        var meaningOfLife = {
-            moduleTypes: [
-                {
-                    name: "meaningOfLife",
-                    description: "outputs the value 42",
-                    inputs: [],
-                    outputs: [
-                        { name: "meaning", source: "c1.value" }
-                    ],
-                    modules: [
-                        {
-                            name: "c1",
-                            type: "constant1",
-                            inputs: { value: [ 42 ] }
-                        }
-                    ]
-                }
-            ]
-        };
-        var f = compile(meaningOfLife);
-        f().should.deep.equal({meaning: 42});
+            compile(meaningOfLife);
+        });
 
     });
 
-    it('handles negative constants', function() {
-        var cold = {
-            moduleTypes: [
-                {
-                    name: "cold",
-                    description: "0 kelvin in celsius",
-                    inputs: [],
-                    outputs: [
-                        { name: "temperature", source: "c1.value" }
-                    ],
-                    modules: [
-                        {
-                            name: "c1",
-                            type: "constant1",
-                            inputs: { value: [ -273 ] }
-                        }
-                    ]
-                }
-            ]
-        };
-        var f = compile(cold);
-        f().should.deep.equal({temperature: -273});
-    });
+    describe('constants', function() {
 
-    it('supports modules with multiple outputs.', function() {
-        var multipleOutputs = {
-            moduleTypes: [
-                {
-                    name: "multipleOutputs",
-                    description: "",
-                    inputs: [],
-                    outputs: [
-                        { name: "out1", source: "c1.value" },
-                        { name: "out2", source: "c2.value" }
-                    ],
-                    modules: [
-                        {
-                            name: "c1",
-                            type: "constant1",
-                            inputs: { value: [ 1 ] }
-                        },
-                        {
-                            name: "c2",
-                            type: "constant1",
-                            inputs: { value: [ 2 ] }
-                        }
-                    ]
-                }
-            ]
-        };
-        var f = compile(multipleOutputs);
-        f().should.deep.equal({out1: 1, out2: 2});
+        it('creates a function which returns the expected results', function() {
+            var meaningOfLife = {
+                moduleTypes: [
+                    {
+                        name: "meaningOfLife",
+                        description: "outputs the value 42",
+                        inputs: [],
+                        outputs: [
+                            { name: "meaning", source: "c1.value" }
+                        ],
+                        modules: [
+                            {
+                                name: "c1",
+                                type: "constant1",
+                                inputs: { value: [ 42 ] }
+                            }
+                        ]
+                    }
+                ]
+            };
+            var f = compile(meaningOfLife);
+            f().should.deep.equal({meaning: 42});
+
+        });
+
+        it('handles negative constants', function() {
+            var cold = {
+                moduleTypes: [
+                    {
+                        name: "cold",
+                        description: "0 kelvin in celsius",
+                        inputs: [],
+                        outputs: [
+                            { name: "temperature", source: "c1.value" }
+                        ],
+                        modules: [
+                            {
+                                name: "c1",
+                                type: "constant1",
+                                inputs: { value: [ -273 ] }
+                            }
+                        ]
+                    }
+                ]
+            };
+            var f = compile(cold);
+            f().should.deep.equal({temperature: -273});
+        });
+
+        it('supports modules with multiple outputs.', function() {
+            var multipleOutputs = {
+                moduleTypes: [
+                    {
+                        name: "multipleOutputs",
+                        description: "",
+                        inputs: [],
+                        outputs: [
+                            { name: "out1", source: "c1.value" },
+                            { name: "out2", source: "c2.value" }
+                        ],
+                        modules: [
+                            {
+                                name: "c1",
+                                type: "constant1",
+                                inputs: { value: [ 1 ] }
+                            },
+                            {
+                                name: "c2",
+                                type: "constant1",
+                                inputs: { value: [ 2 ] }
+                            }
+                        ]
+                    }
+                ]
+            };
+            var f = compile(multipleOutputs);
+            f().should.deep.equal({out1: 1, out2: 2});
+        });
+
     });
 
 });
