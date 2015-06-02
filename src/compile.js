@@ -7,13 +7,11 @@ module.exports = function(definition) {
         var modules = _.indexBy(moduleType.modules, 'name');
         results = _.chain(moduleType.outputs)
             .indexBy('name')
-            .mapValues(function(o){
+            .mapValues(o => {
                 var sourceModule = o.source.split('.')[0];
                 return modules[sourceModule].inputs.value[0];
             })
             .value();
     }
-    return function(){
-        return results;
-    };
+    return () => results;
 };
