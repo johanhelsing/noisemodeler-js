@@ -20,6 +20,7 @@
     "white": true,
     "newcap": false,
     "globals": {
-        "it": true
+        "it": true,
+        "describe": true
     }
 }
