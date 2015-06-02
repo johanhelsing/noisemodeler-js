@@ -1,5 +1,11 @@
-module.exports = function() {
+module.exports = function(definition) {
+    if(definition.moduleTypes){
+        var outputName = definition.moduleTypes[0].outputs[0].name;
+        var constant = definition.moduleTypes[0].modules[0].inputs.value[0];
+    }
     return function(){
-        return {meaning: 42};
+        var result = {};
+        result[outputName] = constant;
+        return result;
     };
 };
