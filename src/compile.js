@@ -1,11 +1,19 @@
+var _ = require('lodash');
+
 module.exports = function(definition) {
+    var results;
     if(definition.moduleTypes){
-        var outputName = definition.moduleTypes[0].outputs[0].name;
-        var constant = definition.moduleTypes[0].modules[0].inputs.value[0];
+        var moduleType = definition.moduleTypes[0];
+        var modules = _.indexBy(moduleType.modules, 'name');
+        results = _.chain(moduleType.outputs)
+            .indexBy('name')
+            .mapValues(function(o){
+                var sourceModule = o.source.split('.')[0];
+                return modules[sourceModule].inputs.value[0];
+            })
+            .value();
     }
     return function(){
-        var result = {};
-        result[outputName] = constant;
-        return result;
+        return results;
     };
 };

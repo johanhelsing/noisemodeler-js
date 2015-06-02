@@ -80,5 +80,35 @@ describe('compile', function() {
         f().should.deep.equal({temperature: -273});
     });
 
+    it('supports modules with multiple outputs.', function() {
+        var multipleOutputs = {
+            moduleTypes: [
+                {
+                    name: "multipleOutputs",
+                    description: "",
+                    inputs: [],
+                    outputs: [
+                        { name: "out1", source: "c1.value" },
+                        { name: "out2", source: "c2.value" }
+                    ],
+                    modules: [
+                        {
+                            name: "c1",
+                            type: "constant1",
+                            inputs: { value: [ 1 ] }
+                        },
+                        {
+                            name: "c2",
+                            type: "constant1",
+                            inputs: { value: [ 2 ] }
+                        }
+                    ]
+                }
+            ]
+        };
+        var f = compile(multipleOutputs);
+        f().should.deep.equal({out1: 1, out2: 2});
+    });
+
 });
 
