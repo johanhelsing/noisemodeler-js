@@ -8,7 +8,7 @@ var meaningOfLife = {
             description: "outputs the value 42",
             inputs: [],
             outputs: [
-                { name: "constant", source: "c1.value" }
+                { name: "meaning", source: "c1.value" }
             ],
             modules: [
                 {
@@ -29,6 +29,11 @@ describe('compile', function() {
 
     it('can compile a very simple module without errors', function() {
         compile(meaningOfLife);
+    });
+
+    it('creates a function which returns the expected results', function() {
+        var f = compile(meaningOfLife);
+        f().should.deep.equal({meaning: 42});
     });
 
 });
