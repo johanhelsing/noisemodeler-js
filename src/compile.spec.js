@@ -118,5 +118,23 @@ describe('compile', function() {
 
     });
 
+    describe('inputs', () => {
+        it('can pass a single input to an output', () => {
+            var m = {
+                moduleTypes: [{
+                    name: "passthrough",
+                    description: "a single input is mapped to as single output",
+                    inputs: [{ name: 'in1', type: '1f' }],
+                    outputs: [{ name: 'out1', source: 'inputs.in1'}],
+                    modules: []
+                }]
+            };
+            var f = compile(m);
+            f({in1: 1}).should.deep.equal({out1: 1});
+            f({in1: 2}).should.deep.equal({out1: 2});
+            f({in1: -10}).should.deep.equal({out1: -10});
+        });
+    });
+
 });
 
