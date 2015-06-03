@@ -119,6 +119,7 @@ describe('compile', function() {
     });
 
     describe('inputs', () => {
+
         it('can pass a single input to an output', () => {
             var m = {
                 moduleTypes: [{
@@ -134,6 +135,29 @@ describe('compile', function() {
             f({in1: 2}).should.deep.equal({out1: 2});
             f({in1: -10}).should.deep.equal({out1: -10});
         });
+
+        it('can pass multiple inputs to outputs', () => {
+            var m = {
+                moduleTypes: [{
+                    name: "passthrough multiple",
+                    description: "two inputs are mapped to two outputs",
+                    inputs: [
+                        { name: 'in1', type: '1f' },
+                        { name: 'in2', type: '1f' }
+                    ],
+                    outputs: [
+                        { name: 'out1', source: 'inputs.in1'},
+                        { name: 'out2', source: 'inputs.in2'}
+                    ],
+                    modules: []
+                }]
+            };
+            var f = compile(m);
+            f({in1: 1, in2: 2}).should.deep.equal({out1: 1, out2: 2});
+            f({in1: 2, in2: 3}).should.deep.equal({out1: 2, out2: 3});
+            f({in1: -10, in2: -20}).should.deep.equal({out1: -10, out2: -20});
+        });
+
     });
 
 });

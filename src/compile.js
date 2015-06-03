@@ -8,9 +8,11 @@ module.exports = function(definition) {
         outputFuncs = _.chain(moduleType.outputs)
             .indexBy('name')
             .mapValues(o => {
-                var sourceModuleId = o.source.split('.')[0];
+                var sourceInfo = o.source.split('.');
+                var sourceModuleId = sourceInfo[0];
+                var outputId = sourceInfo[1];
                 if(sourceModuleId === 'inputs') {
-                    return v => v.in1;
+                    return v => v[outputId];
                 }
                 return () => modules[sourceModuleId].inputs.value[0];
             })
