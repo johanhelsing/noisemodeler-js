@@ -15,11 +15,9 @@ module.exports = function(definition) {
             }
 
             var inputValue = modules[sourceModuleId].inputs.value;
-            if(_.isString(inputValue)){
-                return createFunctionForSource(inputValue);
-            } else {
-                return () => modules[sourceModuleId].inputs.value[0];
-            }
+            return _.isString(inputValue) ?
+                createFunctionForSource(inputValue) :
+                () => inputValue[0];
         };
 
         outputFuncs = _.chain(moduleType.outputs)
