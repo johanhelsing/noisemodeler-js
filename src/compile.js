@@ -5,16 +5,21 @@ module.exports = function(definition) {
     if(definition.moduleTypes){
         var moduleType = definition.moduleTypes[0];
         var modules = _.indexBy(moduleType.modules, 'name');
+
+        var createFunctionForSource = sourceString => {
+            var sourceInfo = sourceString.split('.');
+            var sourceModuleId = sourceInfo[0];
+            var outputId = sourceInfo[1];
+            if(sourceModuleId === 'inputs') {
+                return v => v[outputId];
+            }
+            return () => modules[sourceModuleId].inputs.value[0];
+        };
+
         outputFuncs = _.chain(moduleType.outputs)
             .indexBy('name')
             .mapValues(o => {
-                var sourceInfo = o.source.split('.');
-                var sourceModuleId = sourceInfo[0];
-                var outputId = sourceInfo[1];
-                if(sourceModuleId === 'inputs') {
-                    return v => v[outputId];
-                }
-                return () => modules[sourceModuleId].inputs.value[0];
+                return createFunctionForSource(o.source);
             })
             .value();
     }
