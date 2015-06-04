@@ -13,7 +13,13 @@ module.exports = function(definition) {
             if(sourceModuleId === 'inputs') {
                 return v => v[outputId];
             }
-            return () => modules[sourceModuleId].inputs.value[0];
+
+            var inputValue = modules[sourceModuleId].inputs.value;
+            if(_.isString(inputValue)){
+                return createFunctionForSource(inputValue);
+            } else {
+                return () => modules[sourceModuleId].inputs.value[0];
+            }
         };
 
         outputFuncs = _.chain(moduleType.outputs)

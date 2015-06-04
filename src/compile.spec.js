@@ -158,6 +158,30 @@ describe('compile', function() {
             f({in1: -10, in2: -20}).should.deep.equal({out1: -10, out2: -20});
         });
 
+        it('can pass inputs through one internal module', () => {
+            var m = {
+                moduleTypes: [{
+                    name: "passthrough multiple",
+                    description: "two inputs are mapped to two outputs",
+                    inputs: [
+                        { name: 'in1', type: '1f' },
+                    ],
+                    outputs: [
+                        { name: 'out1', source: 'internal.value'},
+                    ],
+                    modules: [
+                        {
+                            name: 'internal',
+                            type: 'constant1',
+                            inputs: { value: 'inputs.in1' }
+                        }
+                    ]
+                }]
+            };
+            var f = compile(m);
+            f({in1: 1}).should.deep.equal({out1: 1});
+        });
+
     });
 
 });
