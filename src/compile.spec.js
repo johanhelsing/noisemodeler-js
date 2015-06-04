@@ -1,15 +1,15 @@
 var compile = require('./compile');
 require('chai').should();
 
-describe('compile', function() {
+describe('compile', () => {
 
-    describe('basics', function() {
+    describe('basics', () => {
 
-        it('should return a function', function() {
+        it('should return a function', () => {
             compile({}).should.be.a('function');
         });
 
-        it('can compile a very simple module without errors', function() {
+        it('can compile a very simple module without errors', () => {
             var meaningOfLife = {
                 moduleTypes: [
                     {
@@ -35,9 +35,9 @@ describe('compile', function() {
 
     });
 
-    describe('constants', function() {
+    describe('constants', () => {
 
-        it('creates a function which returns the expected results', function() {
+        it('creates a function which returns the expected results', () => {
             var meaningOfLife = {
                 moduleTypes: [
                     {
@@ -62,7 +62,7 @@ describe('compile', function() {
 
         });
 
-        it('handles negative constants', function() {
+        it('handles negative constants', () => {
             var cold = {
                 moduleTypes: [
                     {
@@ -86,7 +86,7 @@ describe('compile', function() {
             f().should.deep.equal({temperature: -273});
         });
 
-        it('supports modules with multiple outputs.', function() {
+        it('supports modules with multiple outputs.', () => {
             var multipleOutputs = {
                 moduleTypes: [
                     {

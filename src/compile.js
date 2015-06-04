@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-module.exports = function(definition) {
+module.exports = definition => {
     var outputFuncs;
     if(definition.moduleTypes){
         var moduleType = definition.moduleTypes[0];
