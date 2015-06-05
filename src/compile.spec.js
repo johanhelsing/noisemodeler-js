@@ -13,16 +13,16 @@ describe('compile', () => {
             var meaningOfLife = {
                 moduleTypes: [
                     {
-                        name: "meaningOfLife",
-                        description: "outputs the value 42",
+                        name: 'meaningOfLife',
+                        description: 'outputs the value 42',
                         inputs: [],
                         outputs: [
-                            { name: "meaning", source: "c1.value" }
+                            { name: 'meaning', source: 'c1.value' }
                         ],
                         modules: [
                             {
-                                name: "c1",
-                                type: "constant1",
+                                name: 'c1',
+                                type: 'constant1',
                                 inputs: { value: [ 42 ] }
                             }
                         ]
@@ -41,16 +41,16 @@ describe('compile', () => {
             var meaningOfLife = {
                 moduleTypes: [
                     {
-                        name: "meaningOfLife",
-                        description: "outputs the value 42",
+                        name: 'meaningOfLife',
+                        description: 'outputs the value 42',
                         inputs: [],
                         outputs: [
-                            { name: "meaning", source: "c1.value" }
+                            { name: 'meaning', source: 'c1.value' }
                         ],
                         modules: [
                             {
-                                name: "c1",
-                                type: "constant1",
+                                name: 'c1',
+                                type: 'constant1',
                                 inputs: { value: [ 42 ] }
                             }
                         ]
@@ -66,16 +66,16 @@ describe('compile', () => {
             var cold = {
                 moduleTypes: [
                     {
-                        name: "cold",
-                        description: "0 kelvin in celsius",
+                        name: 'cold',
+                        description: '0 kelvin in celsius',
                         inputs: [],
                         outputs: [
-                            { name: "temperature", source: "c1.value" }
+                            { name: 'temperature', source: 'c1.value' }
                         ],
                         modules: [
                             {
-                                name: "c1",
-                                type: "constant1",
+                                name: 'c1',
+                                type: 'constant1',
                                 inputs: { value: [ -273 ] }
                             }
                         ]
@@ -90,22 +90,22 @@ describe('compile', () => {
             var multipleOutputs = {
                 moduleTypes: [
                     {
-                        name: "multipleOutputs",
-                        description: "",
+                        name: 'multipleOutputs',
+                        description: '',
                         inputs: [],
                         outputs: [
-                            { name: "out1", source: "c1.value" },
-                            { name: "out2", source: "c2.value" }
+                            { name: 'out1', source: 'c1.value' },
+                            { name: 'out2', source: 'c2.value' }
                         ],
                         modules: [
                             {
-                                name: "c1",
-                                type: "constant1",
+                                name: 'c1',
+                                type: 'constant1',
                                 inputs: { value: [ 1 ] }
                             },
                             {
-                                name: "c2",
-                                type: "constant1",
+                                name: 'c2',
+                                type: 'constant1',
                                 inputs: { value: [ 2 ] }
                             }
                         ]
@@ -123,8 +123,8 @@ describe('compile', () => {
         it('can pass a single input to an output', () => {
             var m = {
                 moduleTypes: [{
-                    name: "passthrough",
-                    description: "a single input is mapped to as single output",
+                    name: 'passthrough',
+                    description: 'a single input is mapped to as single output',
                     inputs: [{ name: 'in1', type: '1f' }],
                     outputs: [{ name: 'out1', source: 'inputs.in1'}],
                     modules: []
@@ -139,8 +139,8 @@ describe('compile', () => {
         it('can pass multiple inputs to outputs', () => {
             var m = {
                 moduleTypes: [{
-                    name: "passthrough multiple",
-                    description: "two inputs are mapped to two outputs",
+                    name: 'passthrough multiple',
+                    description: 'two inputs are mapped to two outputs',
                     inputs: [
                         { name: 'in1', type: '1f' },
                         { name: 'in2', type: '1f' }
@@ -161,8 +161,8 @@ describe('compile', () => {
         it('can pass inputs through one internal module', () => {
             var m = {
                 moduleTypes: [{
-                    name: "passthrough multiple",
-                    description: "two inputs are mapped to two outputs",
+                    name: 'passthrough multiple',
+                    description: 'two inputs are mapped to two outputs',
                     inputs: [
                         { name: 'in1', type: '1f' },
                     ],
