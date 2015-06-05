@@ -17,7 +17,7 @@ module.exports = definition => {
             var inputValue = modules[sourceModuleId].inputs.value;
             return _.isString(inputValue) ?
                 createFunctionForSource(inputValue) :
-                () => inputValue[0];
+                () => inputValue;
         };
 
         outputFuncs = _.chain(moduleType.outputs)
@@ -27,5 +27,7 @@ module.exports = definition => {
             })
             .value();
     }
-    return input => _.mapValues(outputFuncs, f => f(input));
+
+    var unwrapIfScalar = v => v.length === 1 ? v[0] : v;
+    return input => _.mapValues(outputFuncs, f => unwrapIfScalar(f(input)));
 };

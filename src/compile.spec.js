@@ -184,33 +184,33 @@ describe('compile', () => {
 
     });
 
-//    describe('vectors', () => {
-//
-//        it('outputs vectors when it should', () => {
-//            var m = {
-//                moduleTypes: [
-//                    {
-//                        name: 'm',
-//                        description: 'has an output that is a two dimensional vector',
-//                        inputs: [],
-//                        outputs: [
-//                            { name: 'out1', source: 'c1.value' }
-//                        ],
-//                        modules: [
-//                            {
-//                                name: 'c1',
-//                                type: 'constant2',
-//                                inputs: { value: [ 42, 12 ] }
-//                            }
-//                        ]
-//                    }
-//                ]
-//            };
-//            var f = compile(m);
-//            f({}).should.deep.equal({out1: [42, 12]});
-//        });
-//
-//    });
+    describe('vectors', () => {
+
+        it('outputs vectors when it should', () => {
+            var m = {
+                moduleTypes: [
+                    {
+                        name: 'm',
+                        description: 'has an output that is a two dimensional vector',
+                        inputs: [],
+                        outputs: [
+                            { name: 'out1', source: 'c1.value' }
+                        ],
+                        modules: [
+                            {
+                                name: 'c1',
+                                type: 'constant2',
+                                inputs: { value: [ 42, 12 ] }
+                            }
+                        ]
+                    }
+                ]
+            };
+            var f = compile(m);
+            f({}).should.deep.equal({out1: [42, 12]});
+        });
+
+    });
 
 });
 
