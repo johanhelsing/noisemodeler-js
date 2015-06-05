@@ -182,5 +182,25 @@ describe('compile', () => {
 
     });
 
+    describe('functions', () => {
+        it('supports the 1d absolute value function', () => {
+            var m = {moduleTypes: [{
+                name: 'absolute value',
+                description: '',
+                inputs: [{ name: 'in', type: '2f' }],
+                outputs: [{ name: 'out', source: 'a1.value' }],
+                modules: [{
+                    name: 'a1',
+                    type: 'abs',
+                    inputs: { value: 'inputs.in' }
+                }]
+            }]};
+            var f = compile(m);
+            f({in: -1}).should.deep.equal({out: 1});
+            f({in: 1}).should.deep.equal({out: 1});
+            f({in: -10}).should.deep.equal({out: 10});
+        });
+    });
+
 });
 

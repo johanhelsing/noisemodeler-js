@@ -15,9 +15,14 @@ module.exports = definition => {
             }
 
             var inputValue = modules[sourceModuleId].inputs.value;
-            return _.isString(inputValue) ?
+            var valueFunction = _.isString(inputValue) ?
                 createFunctionForSource(inputValue) :
                 () => inputValue;
+
+            var moduleType = modules[sourceModuleId].type;
+            return moduleType === 'abs' ?
+                v => Math.abs(valueFunction(v)) :
+                valueFunction;
         };
 
         outputFuncs = _.chain(moduleType.outputs)
