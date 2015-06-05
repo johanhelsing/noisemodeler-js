@@ -210,6 +210,28 @@ describe('compile', () => {
             f({}).should.deep.equal({out1: [42, 12]});
         });
 
+        it('handles input vectors', () => {
+            var m = {moduleTypes: [{
+                name: 'passthrough',
+                description: 'passes through a two-dimensional signal',
+                inputs: [
+                    { name: 'in', type: '2f' },
+                ],
+                outputs: [
+                    { name: 'out', source: 'internal.value' }
+                ],
+                modules: [
+                    {
+                        name: 'internal',
+                        type: 'constant2',
+                        inputs: { value: 'inputs.in' }
+                    }
+                ]
+            }]};
+            var f = compile(m);
+            f({in: [42,12]}).should.deep.equal({out: [42, 12]});
+        });
+
     });
 
 });
