@@ -14,13 +14,13 @@ module.exports = definition => {
                 return v => v[outputId];
             }
 
-            var inputValue = modules[sourceModuleId].inputs.value;
+            var module = modules[sourceModuleId];
+            var inputValue = module.inputs.value;
             var valueFunction = _.isString(inputValue) ?
                 createFunctionForSource(inputValue) :
                 () => inputValue;
 
-            var moduleType = modules[sourceModuleId].type;
-            return moduleType === 'abs' ?
+            return module.type === 'abs' ?
                 v => Math.abs(valueFunction(v)) :
                 valueFunction;
         };
