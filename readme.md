@@ -10,3 +10,7 @@ Make sure you have npm installed. Clone the repository, and then:
 
     npm install
     npm run dev
+
+## Author
+
+Johan Klokkhammer Helsing <johanhelsing@gmail.com>
